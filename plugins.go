@@ -149,4 +149,8 @@ func InitPlugins() {
 	if Settings.inputKafkaConfig.host != "" && Settings.inputKafkaConfig.topic != "" {
 		registerPlugin(NewKafkaInput, "", &Settings.inputKafkaConfig)
 	}
+
+	if Settings.outputPostgreSQLConfig.uri != "" {
+		registerPlugin(NewPostgreSQLOutput, "", &Settings.outputPostgreSQLConfig)
+	}
 }

@@ -68,6 +68,8 @@ type AppSettings struct {
 
 	inputKafkaConfig  KafkaConfig
 	outputKafkaConfig KafkaConfig
+
+	outputPostgreSQLConfig PostgreSQLConfig
 }
 
 // Settings holds Gor configuration
@@ -157,6 +159,8 @@ func init() {
 	flag.StringVar(&Settings.inputKafkaConfig.host, "input-kafka-host", "", "Send request and response stats to Kafka:\n\tgor --output-stdout --input-kafka-host '192.168.0.1:9092,192.168.0.2:9092'")
 	flag.StringVar(&Settings.inputKafkaConfig.topic, "input-kafka-topic", "", "Send request and response stats to Kafka:\n\tgor --output-stdout --input-kafka-topic 'kafka-log'")
 	flag.BoolVar(&Settings.inputKafkaConfig.useJSON, "input-kafka-json-format", false, "If turned on, it will assume that messages coming in JSON format rather than  GoReplay text format.")
+
+	flag.StringVar(&Settings.outputPostgreSQLConfig.uri, "output-postgresql-uri", "", "Write incoming requests to PostgreSQL:\n\tgor --input-raw :8080 --output-postgresql-uri 'postgres://username:password@localhost:5432/goreplay?sslmode=prefer'")
 
 	flag.Var(&Settings.modifierConfig.headers, "http-set-header", "Inject additional headers to http reqest:\n\tgor --input-raw :8080 --output-http staging.com --http-set-header 'User-Agent: Gor'")
 	flag.Var(&Settings.modifierConfig.headers, "output-http-header", "WARNING: `--output-http-header` DEPRECATED, use `--http-set-header` instead")
